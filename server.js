@@ -13,11 +13,29 @@ var test_data = [
 ];
 
 app.use('/', express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
 
-app.use('/api/comments/', function(req, res, next) {
-  res.json(test_data);
-  }
-)
+var router = express.Router();
+
+router.route('/comments/')
+  .get( function(req, res) {
+    res.json(test_data);
+  })
+  .post(function(req, res) {
+      // functional way
+      // var res_obj = test_data.concat(req.body);
+      // console.log(res_obj);
+      // res.json(res_obj);
+      //
+      // stateful way
+      test_data.push(req.body);
+      console.dir(test_data);
+      res.json(test_data);
+  
+  });
+
+app.use('/api', router)
 
 app.listen(3000, function () {
   console.log('React app listening on port 3000');
