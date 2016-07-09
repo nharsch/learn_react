@@ -29,7 +29,9 @@ router.route('/comments/')
       // res.json(res_obj);
       //
       // stateful way
-      test_data.push(req.body);
+      comment = req.body;
+      comment['id'] = test_data.length + 1
+      test_data.push(comment)
       console.dir(test_data);
       res.json(test_data);
   
