@@ -40,7 +40,8 @@ export default class App extends React.Component {
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
-        task: 'New task'
+        task: 'New task',
+        editing: true
         // TODO: POST to DB
       }])
     });
