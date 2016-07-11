@@ -1,24 +1,37 @@
 import React from 'react';
 
+import classnames from 'classnames';
+
 // a reusable editable component that will call a provided 
 // onEdit callback
-export default ({editing, value, onEdit, ...props}) => {
+export default ({editing, value, onEdit, className, ...props}) => {
   if(editing) {
-    return <Edit value={value} onEdit={onEdit} {...props} />;
+
+    return <Edit
+      className={className}
+      value={value}
+      onEdit={onEdit}
+      {...props} />;
   }
 
-  return <span {...props}>{value}</span>;
+  return (
+    <span className={classnames('vale', className)}
+      {...props}>
+      {value}
+    </span>
+  )
 }
 
 class Edit extends React.Component {
   render() {
-    const {value, ...props} = this.props;
+    const {className, onEdit, value, ...props} = this.props;
 
     return <input
       type="text"
+      className={classnames('edit', className)}
       autoFocus={true}
       defaultValue={value}
-      onBlue={this.finishEdit}
+      onBlur={this.finishEdit}
       onKeyPress={this.checkEnter}
       {...props} />;
   }

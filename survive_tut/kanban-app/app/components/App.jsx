@@ -25,8 +25,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <button onClick={this.addNote}>+</button>
-
+        <button className="add-note" onClick={this.addNote}>+</button>
         <Notes
           notes={notes}
           onNoteClick={this.activateNoteEdit}
@@ -42,6 +41,7 @@ export default class App extends React.Component {
       notes: this.state.notes.concat([{
         id: uuid.v4(),
         task: 'New task'
+        // TODO: POST to DB
       }])
     });
   }
