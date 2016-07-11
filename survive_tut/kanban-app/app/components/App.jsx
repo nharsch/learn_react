@@ -3,17 +3,6 @@ import React from 'react';
 import uuid from 'uuid';
 import Notes from './Notes';
 
-const notes = [
-  {
-    id: uuid.v4(),
-    task: 'Learn React'
-  },
-  {
-    id: uuid.v4(),
-    task: 'Do Laundry'
-  },
-];
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +16,7 @@ export default class App extends React.Component {
         {
           id: uuid.v4(),
           task: 'Do Laundry'
-        },
+        }
       ]
     };
   }
@@ -37,7 +26,7 @@ export default class App extends React.Component {
     return (
       <div>
         <button onClick={this.addNote}>+</button>
-        <Notes notes={notes} />
+        <Notes notes={notes} onDelete={this.deleteNote} />
       </div>
     );
   }
@@ -48,6 +37,16 @@ export default class App extends React.Component {
         id: uuid.v4(),
         task: 'New task'
       }])
+    });
+  }
+
+  deleteNote = (id, e) => {
+    // avoid bubbling to edit
+    e.stopPropagation();
+
+    this.setState({
+      // filter clause: note isn't the note id we want to delete
+      notes: this.state.notes.filter(note => note.id !== id) 
     });
   }
 }
