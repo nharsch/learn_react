@@ -19,7 +19,7 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      notes = [
+      notes : [
         {
           id: uuid.v4(),
           task: 'Learn React'
@@ -36,10 +36,18 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <button onClick={() => console.log('add note')}>+</button>
+        <button onClick={this.addNote}>+</button>
         <Notes notes={notes} />
       </div>
     );
   }
-}
 
+  addNote = () => {
+    this.setState({
+      notes: this.state.notes.concat([{
+        id: uuid.v4(),
+        task: 'New task'
+      }])
+    });
+  }
+}
