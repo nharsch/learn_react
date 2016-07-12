@@ -40,17 +40,18 @@ export default class App extends React.Component {
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
-        task: 'New task',
+        task: '',
         editing: true
         // TODO: POST to DB
       }])
     });
   }
 
-  deleteNote = (id, e) => {
+  deleteNote = (id, e=null) => {
     // avoid bubbling to edit
-    e.stopPropagation();
-
+    if (e) {
+      e.stopPropagation();
+    }
     this.setState({
       // filter clause: note isn't the note id we want to delete
       notes: this.state.notes.filter(note => note.id !== id) 
@@ -70,15 +71,19 @@ export default class App extends React.Component {
   }
   // ie - complete editing
   editNote = (id, task) => {
-    this.setState({
-      notes: this.state.notes.map(note => {
-        if(note.id === id) {
-          note.editing = false;
-          // update note with body info
-          note.task = task;
-        }
-        return note;
-      })
-    });
+    if (!task) {
+      this.deleteNote(id);
+    } else {
+      this.setState({
+        notes: this.state.notes.map(note => {
+          if(note.id === id) {
+            note.editing = false;
+            // update note with body info
+            note.task = task;
+          }
+          return note;
+        })
+      });
+    }
   }
 }
