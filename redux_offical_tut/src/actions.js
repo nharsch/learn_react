@@ -25,10 +25,10 @@ export function setVisibilityFilter(filter) {
 
 // actions are plain JavaScript objects
 // actions must have a `type`
-{
-  type: ADD_TODO,
-  text: 'Build my first Redux app'
-}
+// {
+//   type: ADD_TODO,
+//   text: 'Build my first Redux app'
+// }
 
 
 // action creators
