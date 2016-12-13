@@ -1,4 +1,4 @@
-import React, { Proptypes } from 'react'
+import React, { PropTypes } from 'react'
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -7,7 +7,7 @@ const Link = ({ active, children, onClick }) => {
 
   return (
     <a href="#"
-      onClick={e = {
+      onClick={e => {
         e.preventDefault()
         onClick()
       }}
@@ -22,3 +22,5 @@ Link.propTypes = {
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired
 }
+
+export default Link
